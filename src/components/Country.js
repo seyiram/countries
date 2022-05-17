@@ -46,12 +46,16 @@ const Country = () => {
               </div>
             </div>
             <div className="country__content--bottom">
-              <p>
-                <span>Border Countries:</span>
-              </p>
-              <button>France</button>
-              <button>Germany</button>
-              <button>Netherlands</button>
+              <div className="country__content--bottom-title">
+                <p>
+                  <span>Border Countries:</span>
+                </p>
+              </div>
+              <div className="country__content--bottom-buttons">
+                <button>France</button>
+                <button>Germany</button>
+                <button>Netherlands</button>
+              </div>
             </div>
           </div>
         </div>
