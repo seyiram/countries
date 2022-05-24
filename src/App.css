@@ -268,3 +268,10 @@ body {
     display: flex;
   }
 }
+
+
+/* pagination */
+
+.pagination__wrapper{
+  width: auto;
+}
