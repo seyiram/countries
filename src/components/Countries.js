@@ -1,6 +1,7 @@
 // import { useParams } from "react-router-dom";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+// import Country from "./Country";
 
 const Countries = ({ data, loading }) => {
 
@@ -12,7 +13,7 @@ const Countries = ({ data, loading }) => {
       {data.map(({ name, flag, capital, region, population }) => (
         <Link to={{ pathname: `/${capital}` }} key={name}>
           <div className="countries__card">
-            <img src={flag} alt="flag" />
+            <img src={flag} alt={name} />
             <div className="countries__card--content">
               <h4>{name}</h4>
               <p>
