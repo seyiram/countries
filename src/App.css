@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(251, 251, 251);
 }
 /* Navbar section*/
 
@@ -92,7 +92,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0 4rem;
-  font-size: clamp(0.8rem, 2.5vw, 0.5rem); 
+  font-size: clamp(0.8rem, 2.5vw, 0.5rem);
 }
 
 .countries a {
@@ -104,7 +104,7 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 0.4rem;
   max-width: 15.63rem;
-  height: 21.5rem;
+  max-height: 19.5rem;
   background-color: #fff;
 }
 
@@ -116,11 +116,10 @@ body {
 
 .countries__card img {
   width: 100%;
-  height: 15vw;
+  height: 12vw;
   object-fit: cover;
   border-radius: 0.4rem 0.4rem 0 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-
 }
 
 .countries__card--content {
@@ -142,13 +141,12 @@ body {
   }
 
   .countries__card {
-    height: 19rem;
+    max-height: 19rem;
   }
-  
 }
 @media (max-width: 540px) {
   .countries__card {
-    height: 17rem;
+    max-height: 15rem;
   }
 }
 
@@ -163,7 +161,7 @@ body {
 .country__button {
   padding: 0.5rem 1.8rem;
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 1rem 0rem 5rem 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: none;
 }
@@ -188,6 +186,10 @@ body {
   max-width: 100%;
 }
 
+.country__content--wrapper {
+  margin-left: 1.4rem;
+}
+
 .country__content--wrapper h4 {
   margin-bottom: 1rem;
 }
@@ -206,18 +208,24 @@ body {
 .country__content--bottom {
   display: flex;
   margin-top: 4rem;
+  justify-content: space-between;
 }
 
 .country__content--bottom span {
   margin-right: 1rem;
 }
 
+.country__content--bottom-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
 .country__content--bottom button {
-  margin-right: 1rem;
   padding: 0.4rem 0.5rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 0.2rem;
+  word-break: break-word;
 }
 
 /* mobile */
@@ -228,8 +236,8 @@ body {
   }
 
   .country__button {
-    padding: 0.4rem 0rem;
-    max-width: 30%;
+    /* padding: 0.5rem 0.8rem; */
+    margin: 2rem 0 5rem -0.1rem;
   }
 
   .country__img img {
@@ -265,13 +273,15 @@ body {
   }
 
   .country__content--bottom-buttons {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
   }
 }
 
-
 /* pagination */
 
-.pagination__wrapper{
+.pagination__wrapper {
   width: auto;
 }

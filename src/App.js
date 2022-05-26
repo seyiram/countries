@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Countries from "./components/Countries";
 import Navbar from "./components/Navbar";
-import Search from "./components/Search";
+
 import Country from "./components/Country";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -32,7 +32,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Navbar />
-        <Search />
+        
 
         <Routes>
           <Route
