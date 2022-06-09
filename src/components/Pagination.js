@@ -1,18 +1,27 @@
-const Pagination = ({ countriesPerPage, totalPages, paginate }) => {
-  const pageNumbers = [];
+import ReactPaginate from "react-paginate";
 
-  for (let i = 1; i <= Math.ceil(totalPages / countriesPerPage); i++) {
-    pageNumbers.push(i);
-  }
+const Pagination = ({ pageCount, data, itemsPerPage, setItemOffset }) => {
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % data.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <div className="pagination">
-      {pageNumbers.map((number) => (
-        <li key={number} className="page-item">
-          <a onClick={() => paginate(number)} href="!#" className="page-link">
-            {number}
-          </a>
-        </li>
-      ))}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        pageLinkClassName="page-num"
+        previousLinkClassName="page-num"
+        nextLinkClassName="page-num"
+        activeLinkClassName="active"
+      />
     </div>
   );
 };

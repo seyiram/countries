@@ -1,4 +1,4 @@
-import { FaMoon } from "react-icons/fa";
+import { FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -8,9 +8,10 @@ const Navbar = () => {
         <Link to="/">
           <h2 className="navbar__title">Where in the world?</h2>
         </Link>
+
         <h4 className="navbar__light--mode">
           {" "}
-          <FaMoon /> Dark Mode
+          <FaSun /> Dark Mode
         </h4>
       </div>
     </div>

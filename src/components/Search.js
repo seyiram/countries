@@ -1,6 +1,4 @@
-
-
-const Search = () => {
+const Search = ({ searchTerm, setSearchTerm }) => {
   return (
     <div className="search">
       <div className="search__wrapper">
@@ -10,6 +8,10 @@ const Search = () => {
             className="search__input"
             aria-label="Search"
             placeholder="Search..."
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }}
+            value={searchTerm}
           />
         </div>
         <div className="select__input--wrapper">

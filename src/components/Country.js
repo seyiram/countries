@@ -1,7 +1,10 @@
 import { FaArrowLeft } from "react-icons/fa";
+import { PaginationContext } from "../contexts/PaginationContext";
 import { useParams, Link } from "react-router-dom";
+import { useContext } from "react";
 
-const Country = ({ data }) => {
+const Country = () => {
+  const { countriesAPIData: data } = useContext(PaginationContext);
   let params = useParams();
 
   const response = data.filter((country) => country.capital === params.name);
