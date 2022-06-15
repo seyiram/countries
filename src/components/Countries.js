@@ -12,8 +12,7 @@ const Countries = () => {
     searchTerm,
     setSearchTerm,
     darkMode,
-    handleSearch,
-    searchData,
+    
   } = useContext(PaginationContext);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
