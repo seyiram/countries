@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
 import { useContext, useEffect, useState } from "react";
-import Loader from "react-loader";
 import Pagination from "./Pagination";
 import { PaginationContext } from "../contexts/PaginationContext";
 
@@ -29,27 +28,7 @@ const Countries = () => {
 
   if (loading) {
     return (
-      <Loader
-        loaded={loading}
-        lines={13}
-        length={20}
-        width={10}
-        radius={30}
-        corners={1}
-        rotate={0}
-        direction={1}
-        color="#000"
-        speed={8}
-        trail={60}
-        shadow={false}
-        hwaccel={false}
-        className="spinner"
-        zIndex={2e9}
-        top="50%"
-        left="50%"
-        scale={1.0}
-        loadedClassName="loadedContent"
-      />
+      <h3>Loading...</h3>
     );
   }
   return (
