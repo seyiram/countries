@@ -12,17 +12,15 @@ const Navbar = ({ onClick, darkMode }) => {
         </Link>
 
         <h4 className="navbar__light--mode" onClick={onClick}>
-          {`${
-            darkMode ? (
-              <>
-                <span>Light Mode</span> <FaSun />{" "}
-              </>
-            ) : (
-              <>
-                <span>Dark Mode</span> <FaMoon />
-              </>
-            )
-          }`}
+          {darkMode ? (
+            <span>
+              <FaSun /> Light Mode
+            </span>
+          ) : (
+            <span>
+              <FaMoon /> Dark Mode
+            </span>
+          )}
         </h4>
       </div>
     </div>

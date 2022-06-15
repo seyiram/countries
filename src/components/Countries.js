@@ -6,19 +6,21 @@ import Pagination from "./Pagination";
 import { PaginationContext } from "../contexts/PaginationContext";
 
 const Countries = () => {
+  // data from context
   const {
     countriesAPIData: data,
     loading,
     searchTerm,
     setSearchTerm,
     darkMode,
-    
   } = useContext(PaginationContext);
   const [currentItems, setCurrentItems] = useState([]);
+  // pagination variables
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 12;
 
+  // track page number changes
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(data.slice(itemOffset, endOffset));
