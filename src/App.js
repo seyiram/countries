@@ -9,12 +9,16 @@ import axios from "axios";
 import { PaginationContext } from "./contexts/PaginationContext";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
   let apiUrl = `/all`;
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState([]);
 
   const { countriesAPIData, loading } = useAxios({ url: apiUrl });
 
+  const switchLight = () => {
+    setDarkMode((prevState) => !prevState);
+  };
   // console.log("url here", url)
 
   const handleSearch = async () => {
@@ -28,8 +32,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
-        <Navbar />
+      <div className={`App ${darkMode ? "darkMode" : ""}`}>
+        <Navbar onClick={switchLight} darkMode={darkMode} />
         <PaginationContext.Provider
           value={{
             countriesAPIData,
@@ -38,11 +42,12 @@ function App() {
             setSearchTerm,
             handleSearch,
             searchData,
+            darkMode
           }}
         >
           <Routes>
             <Route exact path="/" element={<Countries />} />
-            <Route exact path="/country/:name" element={<Country />} />
+            <Route exact path="/country/:name" element={<Country darkMode={darkMode} />} />
             <Route
               path="*"
               element={

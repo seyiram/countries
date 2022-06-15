@@ -1,11 +1,14 @@
+import { PaginationContext } from "../contexts/PaginationContext";
+import { useContext } from "react";
 const Search = ({ searchTerm, setSearchTerm }) => {
+  const { darkMode } = useContext(PaginationContext);
   return (
     <div className="search">
       <div className="search__wrapper">
-        <div className="search__input--wrapper">
+        <div className={`search__input--wrapper ${darkMode ? "darkMode" : ""}`}>
           <input
             type="search"
-            className="search__input"
+            className={`search__input ${darkMode ? "darkMode" : ""}`}
             aria-label="Search"
             placeholder="Search..."
             onChange={(event) => {
@@ -14,11 +17,11 @@ const Search = ({ searchTerm, setSearchTerm }) => {
             value={searchTerm}
           />
         </div>
-        <div className="select__input--wrapper">
+        <div className={`select__input--wrapper ${darkMode ? "darkMode" : ""}`}>
           <select
             name="continents"
             id="continents"
-            className="search__select--options"
+            className={`search__select--options ${darkMode ? "darkMode" : ""}`}
           >
             <option value="filter">Filter By Region</option>
             <option value="africa">Africa</option>

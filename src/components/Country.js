@@ -3,7 +3,7 @@ import { PaginationContext } from "../contexts/PaginationContext";
 import { useParams, Link } from "react-router-dom";
 import { useContext } from "react";
 
-const Country = () => {
+const Country = ({ darkMode }) => {
   const { countriesAPIData: data } = useContext(PaginationContext);
   let params = useParams();
 
@@ -17,7 +17,7 @@ const Country = () => {
   return (
     <div className="country">
       <Link to="/">
-        <button className="country__button">
+        <button className={`country__button ${darkMode ? "darkMode" : ""}`}>
           <FaArrowLeft />
           Back
         </button>

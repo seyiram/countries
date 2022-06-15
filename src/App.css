@@ -1,3 +1,10 @@
+:root {
+  --dark-mode-elements: hsl(209, 23%, 22%);
+  --dark-mode-bg: hsl(207, 26%, 17%);
+  --light-mode-elements: #fff;
+  --light-mode-bg: hsl(0, 0%, 98%);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,8 +12,15 @@
   font-family: "Nunito Sans", sans-serif;
 }
 
-.body {
-  background-color: rgb(241, 241, 241);
+.App {
+  background-color: var(--light-mode-bg);
+  min-height: 100vh;
+  height: 100%;
+}
+
+.App.darkMode {
+  background-color: var(--dark-mode-bg);
+  color: #fff;
 }
 
 /* Navbar section*/
@@ -17,6 +31,7 @@
   box-shadow: -1px 7px 5px -6px rgb(0 0 0 / 35%);
   width: 100%;
   padding: 2rem 0;
+  user-select: none;
 }
 
 .navbar a {
@@ -30,6 +45,18 @@
   justify-content: space-between;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+.navbar__light--mode {
+  cursor: pointer;
+}
+.navbar.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: #fff;
+}
+
+.navbar__title.darkMode {
+  color: #fff;
 }
 
 /* Search section */
@@ -52,6 +79,11 @@
   cursor: pointer;
 }
 
+.search__select--options.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: #fff;
+}
+
 .search__input {
   width: 100%;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><path fill='%23838D99' d='M13.22 14.63a8 8 0 1 1 1.41-1.41l4.29 4.29a1 1 0 1 1-1.41 1.41l-4.29-4.29zm-.66-2.07a6 6 0 1 0-8.49-8.49 6 6 0 0 0 8.49 8.49z'></path></svg>");
@@ -61,6 +93,14 @@
   background-repeat: no-repeat;
 }
 
+.search__input.darkMode {
+  color: #fff;
+  background-color: var(--dark-mode-elements);
+}
+
+.search__input.darkMode input::placeholder {
+  color: #fff;
+}
 .search__wrapper {
   display: flex;
   justify-content: space-between;
@@ -107,6 +147,11 @@
   max-width: 15.63rem;
   max-height: 19.5rem;
   background-color: #fff;
+}
+
+.countries__card.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: #fff;
 }
 
 .countries__card:hover {
@@ -159,12 +204,23 @@
   margin-bottom: 5rem;
 }
 
+.country.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: #fff;
+}
+
 .country__button {
   padding: 0.5rem 1.8rem;
   text-align: center;
   margin: 1rem 0rem 5rem 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: none;
+  cursor: pointer;
+}
+
+.country__button.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: #fff;
 }
 
 .country__button svg {
@@ -229,6 +285,11 @@
   word-break: break-word;
 }
 
+.country__content--bottom-buttons.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: #fff;
+}
+
 /* mobile */
 @media (max-width: 746px) {
   .country {
@@ -239,6 +300,11 @@
   .country__button {
     /* padding: 0.5rem 0.8rem; */
     margin: 2rem 0 5rem -0.1rem;
+  }
+
+  .country__button.darkMode {
+    background-color: var(--dark-mode-elements);
+    color: #fff;
   }
 
   .country__img img {
@@ -293,6 +359,11 @@
   gap: 0.4rem;
 }
 
+.pagination.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: #fff;
+}
+
 .page-num {
   padding: 0.5rem 0.9rem;
   cursor: pointer;
@@ -310,5 +381,3 @@
 }
 
 /* Theme */
-
-
