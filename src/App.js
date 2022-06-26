@@ -5,30 +5,23 @@ import Navbar from "./components/Navbar";
 import Country from "./components/Country";
 import { useState } from "react";
 import useAxios from "./hooks/useAxios";
-import axios from "axios";
 import { PaginationContext } from "./contexts/PaginationContext";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   let apiUrl = `/all`;
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchData, setSearchData] = useState([]);
 
-  const { countriesAPIData, loading } = useAxios({ url: apiUrl });
+  const { countriesAPIData, setCountriesAPIData, loading } = useAxios({
+    url: apiUrl,
+  });
 
+  // console.log("data here", countriesAPIData)
   const switchLight = () => {
     setDarkMode((prevState) => !prevState);
   };
-  // console.log("url here", url)
 
-  const handleSearch = async () => {
-    return await axios
-      .get(apiUrl)
-      .then((response) => {
-        setSearchData(response.data);
-      })
-      .catch((error) => console.error(error));
-  };
+ 
 
   return (
     <BrowserRouter>
@@ -37,21 +30,30 @@ function App() {
         <PaginationContext.Provider
           value={{
             countriesAPIData,
+            setCountriesAPIData,
             loading,
             searchTerm,
             setSearchTerm,
-            handleSearch,
-            searchData,
-            darkMode
+            darkMode,
           }}
         >
           <Routes>
             <Route exact path="/" element={<Countries />} />
-            <Route exact path="/country/:name" element={<Country darkMode={darkMode} />} />
+            <Route
+              exact
+              path="/country/:capital"
+              element={<Country darkMode={darkMode} />}
+            />
             <Route
               path="*"
               element={
-                <main style={{ padding: "1rem" }}>
+                <main
+                  style={{
+                    padding: "1rem",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <p>Sorry, there's nothing here!</p>
                 </main>
               }

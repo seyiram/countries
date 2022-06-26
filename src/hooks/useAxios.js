@@ -20,7 +20,7 @@ const useAxios = ({ url }) => {
     getCountriesData();
   }, [getCountriesData]);
 
-  return { countriesAPIData, error, loading };
+  return { countriesAPIData, setCountriesAPIData, error, loading };
 };
 
 export default useAxios;
