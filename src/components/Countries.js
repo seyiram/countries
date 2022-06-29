@@ -7,6 +7,7 @@ import axios from "axios";
 
 const Countries = () => {
   const countriesRef = useRef();
+  const regionsRef = useRef();
 
   // data from context
   const {
@@ -43,15 +44,36 @@ const Countries = () => {
       };
       fetchSearchData();
     } else {
-      return currentItems;
+      setCountriesAPIData(currentItems);
     }
   };
+
+  const handleSelectedRegion = () => {
+    const selectedRegion = regionsRef.current.value;
+    if (selectedRegion.trim()) {
+      const fetchSelectedRegion = async () => {
+        await axios
+          .get(`https://restcountries.com/v2/region/${selectedRegion}`)
+          .then((response) => setCountriesAPIData(response.data))
+          .catch((error) => console.error(error));
+      };
+      fetchSelectedRegion();
+    } else {
+      setCountriesAPIData(currentItems);
+    }
+  };
+
   return (
     <>
-      <Search handleSearch={handleSearch} countriesRef={countriesRef} />
+      <Search
+        handleSearch={handleSearch}
+        handleSelectedRegion={handleSelectedRegion}
+        countriesRef={countriesRef}
+        regionsRef={regionsRef}
+      />
       <div className={`countries ${darkMode ? "darkMode" : ""}`}>
         {currentItems?.map(({ name, flag, capital, region, population }) => (
-          <Link to={{ pathname: `/country/${capital}` }} key={name}>
+          <Link to={{ pathname: `/${name}` }} key={name}>
             <div className={`countries__card ${darkMode ? "darkMode" : ""}`}>
               <img src={flag} alt={name} />
               <div className="countries__card--content">

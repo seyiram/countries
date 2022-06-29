@@ -8,7 +8,7 @@ const Country = ({ darkMode }) => {
   let params = useParams();
   let navigate = useNavigate();
 
-  const response = data.filter((country) => country.capital === params.capital);
+  const response = data.filter((country) => country.name === params.name);
 
   const getBorderCountry = (code) => {
     return data.find((country) => country.alpha3Code === code);
@@ -63,7 +63,7 @@ const Country = ({ darkMode }) => {
                       <span>Sub Region:</span> {subregion}
                     </p>
                     <p>
-                      <span>Capital:</span> {capital}
+                      <span>Capital:</span> {capital ? capital : "Does not have a capital city"}
                     </p>
                   </div>
                   <div className="country__content--right">

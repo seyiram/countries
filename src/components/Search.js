@@ -1,6 +1,11 @@
 import { PaginationContext } from "../contexts/PaginationContext";
 import { useContext } from "react";
-const Search = ({ countriesRef, handleSearch }) => {
+const Search = ({
+  countriesRef,
+  regionsRef,
+  handleSearch,
+  handleSelectedRegion,
+}) => {
   const { darkMode } = useContext(PaginationContext);
   return (
     <div className="search">
@@ -20,6 +25,8 @@ const Search = ({ countriesRef, handleSearch }) => {
             name="continents"
             id="continents"
             className={`search__select--options ${darkMode ? "darkMode" : ""}`}
+            ref={regionsRef}
+            onChange={handleSelectedRegion}
           >
             <option value="filter">Filter By Region</option>
             <option value="africa">Africa</option>
