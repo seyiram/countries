@@ -13,7 +13,7 @@
 }
 
 .App {
-  background-color: var(--light-mode-bg);
+  background-color: var(--light-mode-elements);
   min-height: 100vh;
   height: 100%;
 }
@@ -255,7 +255,6 @@
 }
 .country__content--top {
   display: flex;
-  justify-content: space-evenly;
 }
 
 .country__content--left {
@@ -265,7 +264,6 @@
 .country__content--bottom {
   display: flex;
   margin-top: 4rem;
-  justify-content: space-between;
 }
 
 .country__content--bottom span {
@@ -379,5 +377,3 @@
 .pagination .active {
   background-color: #5ab1bb;
 }
-
-

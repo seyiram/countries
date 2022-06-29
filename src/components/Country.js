@@ -63,7 +63,8 @@ const Country = ({ darkMode }) => {
                       <span>Sub Region:</span> {subregion}
                     </p>
                     <p>
-                      <span>Capital:</span> {capital ? capital : "Does not have a capital city"}
+                      <span>Capital:</span>{" "}
+                      {capital ? capital : "Does not have a capital city"}
                     </p>
                   </div>
                   <div className="country__content--right">
