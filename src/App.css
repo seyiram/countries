@@ -44,7 +44,9 @@
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .navbar__light--mode {
@@ -74,7 +76,10 @@
   outline: none;
   border: none;
   box-shadow: 0px 2px 5px -4px #000000;
-  margin: 2rem 4rem;
+  margin-left: 4rem;
+  margin-right: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   padding: 1.3rem;
   cursor: pointer;
 }
@@ -89,7 +94,10 @@
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><path fill='%23838D99' d='M13.22 14.63a8 8 0 1 1 1.41-1.41l4.29 4.29a1 1 0 1 1-1.41 1.41l-4.29-4.29zm-.66-2.07a6 6 0 1 0-8.49-8.49 6 6 0 0 0 8.49 8.49z'></path></svg>");
   background-position: 0.63rem 1.2rem;
   background-size: 1.25rem 1.25rem;
-  padding: 0.5em 1em 0.5em 3.5em;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+  padding-left: 3.5rem;
   background-repeat: no-repeat;
 }
 
@@ -132,7 +140,8 @@
 .countries {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 0 4rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
   font-size: clamp(0.8rem, 2.5vw, 0.5rem);
 }
 
@@ -296,8 +305,10 @@
   }
 
   .country__button {
-    /* padding: 0.5rem 0.8rem; */
-    margin: 2rem 0 5rem -0.1rem;
+    margin-top: 2rem;
+    max-width: 7rem;
+    display: flex;
+    align-items: center;
   }
 
   .country__button.darkMode {
