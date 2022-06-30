@@ -100,7 +100,15 @@ const Countries = () => {
             </Link>
           ))
         ) : (
-          <p>No Countries Found!</p>
+          <p
+            style={{
+              padding: "1rem",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            No Countries Found!
+          </p>
         )}
       </div>
       <Pagination
