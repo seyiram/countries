@@ -24,6 +24,7 @@ const Search = ({
           <select
             name="continents"
             id="continents"
+            aria-label="continents"
             className={`search__select--options ${darkMode ? "darkMode" : ""}`}
             ref={regionsRef}
             onChange={handleSelectedRegion}

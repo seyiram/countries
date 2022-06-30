@@ -16,12 +16,9 @@ function App() {
     url: apiUrl,
   });
 
-  // console.log("data here", countriesAPIData)
   const switchLight = () => {
     setDarkMode((prevState) => !prevState);
   };
-
- 
 
   return (
     <BrowserRouter>
