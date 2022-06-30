@@ -6,6 +6,7 @@ import { PaginationContext } from "../contexts/PaginationContext";
 import axios from "axios";
 
 const Countries = () => {
+  // useRef to get the values of input fields
   const countriesRef = useRef();
   const regionsRef = useRef();
 
@@ -33,12 +34,13 @@ const Countries = () => {
     return <h3>Loading...</h3>;
   }
 
+  //handle user search input
   const handleSearch = () => {
     const searchTerm = countriesRef.current.value;
     if (searchTerm.trim()) {
       const fetchSearchData = async () => {
         await axios
-          .get(`https://restcountries.com/v2/name/${searchTerm}`)
+          .get(`https://restcountries.com/v2/name/${searchTerm.toLowerCase()}`)
           .then((response) => setCountriesAPIData(response.data))
           .catch((error) => console.error(error));
       };
@@ -47,13 +49,15 @@ const Countries = () => {
       setCountriesAPIData(currentItems);
     }
   };
-
+  // handle user region selection
   const handleSelectedRegion = () => {
     const selectedRegion = regionsRef.current.value;
     if (selectedRegion.trim()) {
       const fetchSelectedRegion = async () => {
         await axios
-          .get(`https://restcountries.com/v2/region/${selectedRegion}`)
+          .get(
+            `https://restcountries.com/v2/region/${selectedRegion.toLowerCase()}`
+          )
           .then((response) => setCountriesAPIData(response.data))
           .catch((error) => console.error(error));
       };
@@ -72,28 +76,32 @@ const Countries = () => {
         regionsRef={regionsRef}
       />
       <div className={`countries ${darkMode ? "darkMode" : ""}`}>
-        {currentItems?.map(({ name, flag, capital, region, population }) => (
-          <Link to={{ pathname: `/${name}` }} key={name}>
-            <div className={`countries__card ${darkMode ? "darkMode" : ""}`}>
-              <img src={flag} alt={name} />
-              <div className="countries__card--content">
-                <h4>{name}</h4>
-                <p>
-                  <span>Population: </span>{" "}
-                  {population.toLocaleString(undefined, {
-                    maximumFractionDigits: 2,
-                  })}
-                </p>
-                <p>
-                  <span>Region: </span> {region}
-                </p>
-                <p>
-                  <span>Capital: </span> {capital}
-                </p>
+        {currentItems ? (
+          currentItems.map(({ name, flag, capital, region, population }) => (
+            <Link to={{ pathname: `/country/${name}` }} key={name}>
+              <div className={`countries__card ${darkMode ? "darkMode" : ""}`}>
+                <img src={flag} alt={name} />
+                <div className="countries__card--content">
+                  <h4>{name}</h4>
+                  <p>
+                    <span>Population: </span>{" "}
+                    {population.toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
+                  <p>
+                    <span>Region: </span> {region}
+                  </p>
+                  <p>
+                    <span>Capital: </span> {capital}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))
+        ) : (
+          <p>No Countries Found!</p>
+        )}
       </div>
       <Pagination
         pageCount={pageCount}

@@ -41,7 +41,7 @@ function App() {
             <Route exact path="/" element={<Countries />} />
             <Route
               exact
-              path="/:name"
+              path="/country/:name"
               element={<Country darkMode={darkMode} />}
             />
             <Route
