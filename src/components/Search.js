@@ -1,33 +1,40 @@
-import { PaginationContext } from "../contexts/PaginationContext";
-import { useContext } from "react";
+
+import { useTheme } from '../contexts/ThemeContext';
 const Search = ({
   countriesRef,
-  regionsRef,
   handleSearch,
   handleSelectedRegion,
+  regionsRef,
 }) => {
-  const { darkMode } = useContext(PaginationContext);
+  const { darkMode } = useTheme();
   return (
     <div className="search">
       <div className="search__wrapper">
-        <div className={`search__input--wrapper ${darkMode ? "darkMode" : ""}`}>
+        <div
+          className={`search__input--wrapper ${darkMode ? 'darkMode' : ''
+            }`}
+        >
           <input
-            type="search"
-            className={`search__input ${darkMode ? "darkMode" : ""}`}
             aria-label="Search"
+            className={`search__input ${darkMode ? 'darkMode' : ''}`}
+            onChange={handleSearch}
             placeholder="Search..."
             ref={countriesRef}
-            onChange={handleSearch}
+            type="search"
           />
         </div>
-        <div className={`select__input--wrapper ${darkMode ? "darkMode" : ""}`}>
+        <div
+          className={`select__input--wrapper ${darkMode ? 'darkMode' : ''
+            }`}
+        >
           <select
-            name="continents"
-            id="continents"
             aria-label="continents"
-            className={`search__select--options ${darkMode ? "darkMode" : ""}`}
-            ref={regionsRef}
+            className={`search__select--options ${darkMode ? 'darkMode' : ''
+              }`}
+            id="continents"
+            name="continents"
             onChange={handleSelectedRegion}
+            ref={regionsRef}
           >
             <option value="filter">Filter By Region</option>
             <option value="africa">Africa</option>

@@ -1,27 +1,28 @@
-import { Link } from "react-router-dom";
-import Search from "../components/Search";
-import { useContext, useEffect, useState, useRef } from "react";
-import Pagination from "./Pagination";
-import { PaginationContext } from "../contexts/PaginationContext";
-import axios from "axios";
 
-const Countries = () => {
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Search from '../components/Search';
+import Pagination from './Pagination';
+import { useTheme } from '../contexts/ThemeContext';
+
+
+const Countries = ({ countriesAPIData: data, loading }) => {
+
+
   // useRef to get the values of input fields
   const countriesRef = useRef();
   const regionsRef = useRef();
 
   // data from context
   const {
-    countriesAPIData: data,
-    setCountriesAPIData,
-    loading,
     darkMode,
-  } = useContext(PaginationContext);
+  } = useTheme();
   const [currentItems, setCurrentItems] = useState([]);
   // pagination variables
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 12;
+
 
   // track page number changes
   useEffect(() => {
@@ -30,81 +31,82 @@ const Countries = () => {
     setPageCount(Math.ceil(data.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, data]);
 
+
+  //handle user search input
+
+  const handleSearch = useCallback(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    const searchTerm = countriesRef.current.value.trim().toLowerCase();
+
+    const searchedCountries = data.filter((country) => country.name.toLowerCase().includes(searchTerm))
+    setCurrentItems(searchedCountries.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(searchedCountries.length / itemsPerPage))
+
+  }, [data, itemOffset]);
+
+
+  // handle user region selection
+  const handleSelectedRegion = useCallback(() => {
+    const selectedRegion = regionsRef?.current.value.trim().toLowerCase();
+    if (selectedRegion) {
+      const selectedCountriesByRegion = data.filter((country) => country.region.toLowerCase() === selectedRegion)
+      setCurrentItems(selectedCountriesByRegion);
+    }
+    else {
+      setCurrentItems(data);
+    }
+
+  }, [data]);
+
+
   if (loading) {
     return <h3>Loading...</h3>;
   }
 
-  //handle user search input
-  const handleSearch = () => {
-    const searchTerm = countriesRef.current.value;
-    if (searchTerm.trim()) {
-      const fetchSearchData = async () => {
-        await axios
-          .get(`https://restcountries.com/v2/name/${searchTerm.toLowerCase()}`)
-          .then((response) => setCountriesAPIData(response.data))
-          .catch((error) => console.error(error));
-      };
-      fetchSearchData();
-    } else {
-      setCountriesAPIData(currentItems);
-    }
-  };
-  // handle user region selection
-  const handleSelectedRegion = () => {
-    const selectedRegion = regionsRef.current.value;
-    if (selectedRegion.trim()) {
-      const fetchSelectedRegion = async () => {
-        await axios
-          .get(
-            `https://restcountries.com/v2/region/${selectedRegion.toLowerCase()}`
-          )
-          .then((response) => setCountriesAPIData(response.data))
-          .catch((error) => console.error(error));
-      };
-      fetchSelectedRegion();
-    } else {
-      setCountriesAPIData(currentItems);
-    }
-  };
-
   return (
     <>
       <Search
+        countriesRef={countriesRef}
         handleSearch={handleSearch}
         handleSelectedRegion={handleSelectedRegion}
-        countriesRef={countriesRef}
         regionsRef={regionsRef}
       />
-      <div className={`countries ${darkMode ? "darkMode" : ""}`}>
+      <div className={`countries ${darkMode ? 'darkMode' : ''}`}>
         {currentItems ? (
-          currentItems.map(({ name, flag, capital, region, population }) => (
-            <Link to={{ pathname: `/country/${name}` }} key={name}>
-              <div className={`countries__card ${darkMode ? "darkMode" : ""}`}>
-                <img src={flag} alt={name} />
-                <div className="countries__card--content">
-                  <h4>{name}</h4>
-                  <p>
-                    <span>Population: </span>{" "}
-                    {population.toLocaleString(undefined, {
-                      maximumFractionDigits: 2,
-                    })}
-                  </p>
-                  <p>
-                    <span>Region: </span> {region}
-                  </p>
-                  <p>
-                    <span>Capital: </span> {capital}
-                  </p>
+          currentItems.map(
+            ({ capital, flag, name, population, region }) => (
+              <Link key={name} to={{ pathname: `/country/${name}` }}>
+                <div
+                  className={`countries__card ${darkMode ? 'darkMode' : ''
+                    }`}
+                >
+                  <img alt={name} src={flag} />
+                  <div className="countries__card--content">
+                    <h4>{name}</h4>
+                    <p>
+                      <span>Population: </span>{' '}
+                      {population.toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                      })}
+                    </p>
+                    <p>
+                      <span>Region: </span> {region}
+                    </p>
+                    <p>
+                      <span>Capital: </span> {capital}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))
+              </Link>
+            )
+          )
         ) : (
           <p
             style={{
-              padding: "1rem",
-              display: "flex",
-              justifyContent: "center",
+              padding: '2rem',
+              display: 'flex',
+              justifyContent: 'center',
+              fontSize: '4rem',
             }}
           >
             No Countries Found!
@@ -112,9 +114,9 @@ const Countries = () => {
         )}
       </div>
       <Pagination
-        pageCount={pageCount}
         data={data}
         itemsPerPage={itemsPerPage}
+        pageCount={pageCount}
         setItemOffset={setItemOffset}
       />
     </>
